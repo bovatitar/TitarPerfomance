@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Админ панель</title>
+		<link href="app/css/uikit.css" rel="stylesheet">
+		<script src="app/js/libs/uikit.min.js"></script>
+		<script src="app/js/libs/uikit-icons.min.js"></script>
+		<script>
+
+		</script>
+
+
+  </head>
+  <body>
+		<div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center uk-background-muted uk-background-cover"  uk-height-viewport="expand: true">
+			<h1 class="">TitarLab.com</h1>
+
+			<div class="uk-width-large uk-card uk-card-default uk-form-stacked">
+				<div class="uk-card-body">
+					<div class="uk-margin">
+						<div class="uk-form-controls">
+							<input class="uk-input" id="form-stacked-text" type="text" placeholder="Логин">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<div class="uk-form-controls">
+							<input class="uk-input" id="form-stacked-text" type="password" placeholder="Пароль">
+						</div>
+					</div>
+				</div>
+				<button class="uk-button uk-button-primary uk-width-1-1" onclick="showNotification();">
+					Логин
+				</button>
+			</div>
+		</div>
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+
+
+			function showNotification(){
+				new window.Notification("test", {body:"Random:" + 20})
+			}
+
+    </script>
+  </body>
+</html>
