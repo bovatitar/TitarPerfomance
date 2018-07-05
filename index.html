@@ -11,85 +11,40 @@
 		<script>if (window.module) module = window.module;</script>
   </head>
   <body>
-		<div class="uk-flex uk-flex-column uk-background-muted uk-flex-between">
-			<input class="uk-input" id="phone" placeholder="Телефон">
-			<button class="uk-button uk-button-primary" onclick="getHash(document.getElementById('phone').value)">send code</button>
-			<input class="uk-input" id="code" placeholder="Код подтверждение">
-			<button class="uk-button uk-button-primary" onclick="login();">auth</button>
+	  <div id="test"></div>
 
-			<div class="uk-flex uk-flex-row uk-width-1-1" uk-height-viewport="expand: true">
-				<div class="uk-width-1-3 uk-padding-small">
-					<h3>Ежедневные задачи</h3>
-					<span class="uk-link">Добавить <span uk-icon="icon:plus"></span></span>
-					<ul class="uk-list">
-						<li class="uk-flex uk-flex-between uk-flex-middle">
-							<span class="uk-width-expand">Задача 1</span>
-							<input type="checkbox" class="uk-checkbox">
-						</li>
-						<li class="uk-flex uk-flex-between uk-flex-middle">
-							<span class="uk-width-expand">Задача 2</span>
-							<input type="checkbox" class="uk-checkbox">
-						</li>
-					</ul>
-				</div>
-				<div class="uk-width-1-3 uk-padding-small">
-					<h3>Список дел</h3>
-					<span class="uk-link">Добавить <span uk-icon="icon:plus"></span></span>
-					<ul class="uk-list">
-						<li class="uk-flex uk-flex-between uk-flex-middle">
-							<span class="uk-width-expand">Задача 1</span>
-							<input type="checkbox" class="uk-checkbox">
-						</li>
-						<li class="uk-flex uk-flex-between uk-flex-middle">
-							<span class="uk-width-expand">Задача 2</span>
-							<input type="checkbox" class="uk-checkbox">
-						</li>
-					</ul>
-				</div>
-				<div class="uk-width-1-3 uk-padding-small">
-					<h3>Расписание</h3>
-					<span class="uk-link">Добавить <span uk-icon="icon:plus"></span></span>
-					<ul class="uk-list">
-						<li>
-							<span class="uk-link">9:45-11:15</span> - Мероприятие 1 <span uk-icon="icon:bell" uk-tooltip="09h 00m"></span>
-						</li>
-						<li>
-							<span class="uk-link">11:30-13:00</span> - Мероприятие 2
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="uk-flex uk-flex-right  uk-background-secondary uk-light">
-				<span class="uk-margin-small-right uk-margin-small-left">09.06.2018 | 16:28</span>
-			</div>
-		</div>
+		<div id="offcanvas-nav" uk-offcanvas="">
+        <div class="uk-offcanvas-bar">
+
+            <ul class="uk-nav uk-nav-default">
+                <li class="uk-active"><a href="#">Главная</a></li>
+                <li class=""><a href="#">Настройки</a></li>
+                <li class="uk-parent">
+                    <a href="#">Parent</a>
+                    <ul class="uk-nav-sub">
+                        <li><a href="#">Sub item</a></li>
+                        <li><a href="#">Sub item</a></li>
+                    </ul>
+                </li>
+                <li class="uk-nav-header">Telegram</li>
+                <li><a href="#modal" uk-toggle><span class="uk-margin-small-right" uk-icon="icon: sign-in"></span> Вход</a></li>
+                <li class="uk-nav-divider"></li>
+            </ul>
+
+        </div>
+    </div>
 
     <script>
       // You can also require other files to run in this process
+	  const t = require('./app/js/titar.js');
       require('./renderer.js')
-	  var telegram = require('./Telegram.js');
-	  console.log(telegram);
-	  let hash;
-
-	  function getHash(phone){
-		  hash = telegram.sendCode(phone);
-		  console.log(hash);
-	  }
-	  function login(){
-		  console.log(hash);
-		  console.log(parseInt(document.getElementById('code').value))
-		  hash.then(function(item){
-			  console.log(item.phone_code_hash);
-			  telegram.login(item.phone_code_hash,document.getElementById('code').value);
-		  })
-
-	  }
-
-
-			function showNotification(title, body){
-				let notification = new window.Notification(title, {body:body})
-			}
-
+	  require('./app/js/init.js')
+	  var shell = require('electron').shell;
+   //open links externally by default
+	   $(document).on('click', 'a[href^="http"]', function(event) {
+		   event.preventDefault();
+		   shell.openExternal(this.href);
+	   });
     </script>
   </body>
 </html>
